@@ -5,7 +5,11 @@
  */
 
 import { API_CONFIG, REGIONS, SKIN_MODES, ANALYSIS_VERSIONS, PHOTO_ANGLES } from './config.js';
-import { ENV } from './env.js';
+
+// ENV配置 - 可在此处设置默认API Key（留空则用户手动输入）
+const ENV = {
+  CLAUDE_API_KEY: ''
+};
 
 // System Prompt - 快速版（20项基础指标）
 const SYSTEM_PROMPT_QUICK = `你是一名专精多元美学的 AI 颜值分析师，具备中日韩泰及欧美审美体系的专业认知。
