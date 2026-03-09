@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#0E0C0F">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <title>顔鉴 · AI 东亚颜值分析</title>
+  <meta name="description" content="专为东亚审美校准的 AI 颜值分析工具 —— 不只给分，更给出路。">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  
+  <!-- html2canvas -->
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Ambient Glow Effects -->
+    <div class="ambient-glow ambient-glow--gold"></div>
+    <div class="ambient-glow ambient-glow--rose"></div>
+    
+    <!-- Grain Overlay -->
+    <div class="grain-overlay"></div>
+    
+    <!-- ========== Screen 1: 落地页 ========== -->
+    <section id="screen-landing" class="screen screen-landing active">
+      <!-- Navbar -->
+      <nav class="navbar">
+        <div class="navbar__brand">◆ 顔鉴</div>
+        <div class="navbar__actions">
+          <button class="navbar__action" data-action="profile" aria-label="个人中心">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </button>
+          <button class="navbar__action" data-action="settings" aria-label="设置">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+        </div>
+      </nav>
+      
+      <div class="landing__content">
+        <!-- Brand Section -->
+        <div class="landing__brand">
+          <div class="landing__brand-symbol">✦</div>
+          <h1 class="landing__brand-name">顔 鉴</h1>
+          <p class="landing__brand-subtitle">AI 东亚颜值分析</p>
+          <p class="landing__brand-slogan">「看见真实的自己之美」</p>
+        </div>
+        
+        <!-- Upload Area (Quick Mode - Single Photo) -->
+        <div class="landing__upload" id="upload-single">
+          <div id="upload-area" class="upload-area" role="button" tabindex="0" aria-label="点击上传照片">
+            <div class="upload-area__guide">
+              <div class="upload-area__corners">
+                <div class="upload-area__corner upload-area__corner--tl"></div>
+                <div class="upload-area__corner upload-area__corner--tr"></div>
+                <div class="upload-area__corner upload-area__corner--bl"></div>
+                <div class="upload-area__corner upload-area__corner--br"></div>
+              </div>
+              <svg class="upload-area__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+              <span class="upload-area__text">点击拍摄或从相册选取</span>
+            </div>
+            <img id="upload-preview" class="upload-area__preview" alt="预览图" style="display: none;">
+            <input type="file" id="upload-input" accept="image/*" capture="user" hidden>
+          </div>
+        </div>
+        
+        <!-- Upload Area (Multi-Photo Mode for Standard/Pro) -->
+        <div class="landing__upload-multi" id="upload-multi" style="display: none;">
+          <div class="upload-multi__header">
+            <span id="upload-multi-title">请拍摄 4 张照片</span>
+            <span id="upload-multi-progress" class="upload-multi__count">0/4</span>
+          </div>
+          
+          <div class="upload-multi__grid" id="upload-multi-grid">
+            <!-- 正面 -->
+            <div class="upload-multi__item" data-angle="front">
+              <div class="upload-multi__preview">
+                <img class="upload-multi__img" src="" alt="" style="display: none;">
+                <div class="upload-multi__placeholder">
+                  <span class="upload-multi__angle-icon">👤</span>
+                  <span class="upload-multi__angle-name">正面 0°</span>
+                </div>
+              </div>
+              <div class="upload-multi__status"></div>
+            </div>
+            
+            <!-- 左45度 -->
+            <div class="upload-multi__item" data-angle="left45">
+              <div class="upload-multi__preview">
+                <img class="upload-multi__img" src="" alt="" style="display: none;">
+                <div class="upload-multi__placeholder">
+                  <span class="upload-multi__angle-icon">👤</span>
+                  <span class="upload-multi__angle-name">左 45°</span>
+                </div>
+              </div>
+              <div class="upload-multi__status"></div>
+            </div>
+            
+            <!-- 右45度 -->
+            <div class="upload-multi__item" data-angle="right45">
+              <div class="upload-multi__preview">
+                <img class="upload-multi__img" src="" alt="" style="display: none;">
+                <div class="upload-multi__placeholder">
+                  <span class="upload-multi__angle-icon">👤</span>
+                  <span class="upload-multi__angle-name">右 45°</span>
+                </div>
+              </div>
+              <div class="upload-multi__status"></div>
+            </div>
+            
+            <!-- 侧面90度 -->
+            <div class="upload-multi__item" data-angle="side90">
+              <div class="upload-multi__preview">
+                <img class="upload-multi__img" src="" alt="" style="display: none;">
+                <div class="upload-multi__placeholder">
+                  <span class="upload-multi__angle-icon">👤</span>
+                  <span class="upload-multi__angle-name">侧面 90°</span>
+                </div>
+              </div>
+              <div class="upload-multi__status"></div>
+            </div>
+            
+            <!-- 仰视 (专业版) -->
+            <div class="upload-multi__item upload-multi__item--pro" data-angle="upward" style="display: none;">
+              <div class="upload-multi__preview">
+                <img class="upload-multi__img" src="" alt="" style="display: none;">
+                <div class="upload-multi__placeholder">
+                  <span class="upload-multi__angle-icon">🔼</span>
+                  <span class="upload-multi__angle-name">仰视 30°</span>
+                </div>
+              </div>
+              <div class="upload-multi__status"></div>
+            </div>
+            
+            <!-- 俯视 (专业版) -->
+            <div class="upload-multi__item upload-multi__item--pro" data-angle="downward" style="display: none;">
+              <div class="upload-multi__preview">
+                <img class="upload-multi__img" src="" alt="" style="display: none;">
+                <div class="upload-multi__placeholder">
+                  <span class="upload-multi__angle-icon">🔽</span>
+                  <span class="upload-multi__angle-name">俯视 30°</span>
+                </div>
+              </div>
+              <div class="upload-multi__status"></div>
+            </div>
+          </div>
+          
+          <input type="file" id="upload-multi-input" accept="image/*" capture="user" hidden>
+          
+          <div class="upload-multi__tips">
+            <p>💡 拍摄提示：保持光线均匀，露出完整耳廓</p>
+          </div>
+        </div>
+        
+        <!-- Mode Selection -->
+        <div class="landing__modes">
+          <div id="skin-mode-control" class="segmented-control">
+            <div class="segmented-control__slider segmented-control__slider--left"></div>
+            <button class="segmented-control__option segmented-control__option--active" data-mode="natural">
+              素颜模式
+            </button>
+            <button class="segmented-control__option" data-mode="makeup">
+              有妆模式
+            </button>
+          </div>
+        </div>
+        
+        <!-- Version Selection -->
+        <div class="landing__version">
+          <div class="version-tabs">
+            <button class="version-tab version-tab--active" data-version="quick">
+              <span class="version-tab__name">快速版</span>
+              <span class="version-tab__desc">1张 · 20项</span>
+            </button>
+            <button class="version-tab" data-version="standard">
+              <span class="version-tab__name">标准版</span>
+              <span class="version-tab__desc">4张 · 60项</span>
+              <span class="version-tab__badge">推荐</span>
+            </button>
+            <button class="version-tab" data-version="pro">
+              <span class="version-tab__name">专业版</span>
+              <span class="version-tab__desc">6张 · 100项</span>
+              <span class="version-tab__badge version-tab__badge--pro">PRO</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Region Selection -->
+        <div class="landing__regions">
+          <div class="region-tags">
+            <button class="region-tag region-tag--active" data-region="china">中国</button>
+            <button class="region-tag" data-region="korea">韩国</button>
+            <button class="region-tag" data-region="japan">日本</button>
+            <button class="region-tag" data-region="thailand">泰国</button>
+            <button class="region-tag" data-region="western">欧美</button>
+          </div>
+        </div>
+        
+        <!-- CTA Button -->
+        <div class="landing__cta">
+          <button id="start-analysis" class="btn-primary" disabled>
+            <span>开始颜值分析</span>
+            <span class="btn-primary__arrow">→</span>
+          </button>
+        </div>
+        
+        <!-- Privacy Note -->
+        <div class="landing__privacy">
+          <div class="privacy-note">
+            <span class="privacy-note__icon">🔒</span>
+            <span>照片仅用于本次分析，不存储</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ========== Screen 2: 分析等待页 ========== -->
+    <section id="screen-analyzing" class="screen screen-analyzing">
+      <div class="analyzing__photo">
+        <img id="analyzing-photo" src="" alt="分析中的照片">
+        <div class="analyzing__scan-line"></div>
+      </div>
+      
+      <h2 class="analyzing__title">正在分析您的颜值特征...</h2>
+      
+      <div class="analyzing__progress">
+        <div class="analyzing__progress-bar">
+          <div id="analyzing-progress" class="analyzing__progress-fill" style="width: 0%"></div>
+        </div>
+      </div>
+      
+      <div id="analyzing-steps" class="analyzing__steps step-list">
+        <!-- Steps will be populated by JS -->
+      </div>
+      
+      <div id="analyzing-timer" class="analyzing__timer">预计还需 5 秒...</div>
+    </section>
+    
+    <!-- ========== Screen 3: 评分报告页 ========== -->
+    <section id="screen-report" class="screen screen-report">
+      <!-- Navbar -->
+      <nav class="navbar">
+        <button class="navbar__action" data-action="back" aria-label="返回">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <span class="navbar__brand" style="font-size: 16px;">顔鉴分析报告</span>
+        <button class="navbar__action" data-action="share" aria-label="分享">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"></path>
+          </svg>
+        </button>
+      </nav>
+      
+      <div class="report__content">
+        <!-- Score Card -->
+        <div class="report__score-card glass-card">
+          <div class="report__score-header">
+            <img id="report-avatar" class="report__avatar" src="" alt="头像">
+            <div class="report__score-info">
+              <div class="report__score-main">
+                <span id="report-score" class="report__score-value">0.0</span>
+                <span id="report-rank" class="report__rank-label">分析中</span>
+              </div>
+              <div id="report-percentile" class="report__percentile">
+                超过了 <span class="report__percentile-value">0%</span> 的用户
+              </div>
+            </div>
+          </div>
+          
+          <div class="report__summary">
+            <p id="report-summary" class="report__summary-text"></p>
+            <p id="report-star-match" class="report__star-match"></p>
+          </div>
+          
+          <div class="report__regions region-tags">
+            <button class="report__region-tag region-tag region-tag--active" data-region="china">中国</button>
+            <button class="report__region-tag region-tag" data-region="korea">韩国</button>
+            <button class="report__region-tag region-tag" data-region="japan">日本</button>
+            <button class="report__region-tag region-tag" data-region="thailand">泰国</button>
+            <button class="report__region-tag region-tag" data-region="western">欧美</button>
+          </div>
+        </div>
+        
+        <!-- Radar Chart -->
+        <div class="report__radar-section">
+          <div class="report__radar">
+            <canvas id="radar-canvas" class="report__radar-canvas" width="280" height="280"></canvas>
+          </div>
+        </div>
+        
+        <!-- Dimension Scores -->
+        <div class="report__dimensions">
+          <h3 class="report__dimensions-title">分项评分</h3>
+          <div id="dimensions-list">
+            <!-- Dimensions will be populated by JS -->
+          </div>
+        </div>
+        
+        <!-- Side Profile Analysis (Standard/Pro) -->
+        <div id="side-profile-section" class="report__section glass-card" style="display: none;">
+          <h3 class="report__section-title">📐 侧面轮廓分析</h3>
+          <div id="side-profile-content" class="report__section-content">
+            <!-- Side profile analysis will be populated by JS -->
+          </div>
+        </div>
+        
+        <!-- Skin Analysis (Standard/Pro) -->
+        <div id="skin-analysis-section" class="report__section glass-card" style="display: none;">
+          <h3 class="report__section-title">✨ 肤质详细分析</h3>
+          <div id="skin-analysis-content" class="report__section-content">
+            <!-- Skin analysis will be populated by JS -->
+          </div>
+        </div>
+        
+        <!-- Neoteny System (Pro only) -->
+        <div id="neoteny-section" class="report__section glass-card" style="display: none;">
+          <h3 class="report__section-title">🌸 幼态感系统 <span class="pro-badge">PRO</span></h3>
+          <div id="neoteny-content" class="report__section-content">
+            <!-- Neoteny analysis will be populated by JS -->
+          </div>
+        </div>
+        
+        <!-- 3D Definition (Pro only) -->
+        <div id="definition3d-section" class="report__section glass-card" style="display: none;">
+          <h3 class="report__section-title">🎭 立体度分析 <span class="pro-badge">PRO</span></h3>
+          <div id="definition3d-content" class="report__section-content">
+            <!-- 3D definition analysis will be populated by JS -->
+          </div>
+        </div>
+        
+        <!-- Aesthetic Reference (Pro only) -->
+        <div id="aesthetic-ref-section" class="report__section glass-card" style="display: none;">
+          <h3 class="report__section-title">💉 医美优化参考 <span class="pro-badge">PRO</span></h3>
+          <div id="aesthetic-ref-content" class="report__section-content">
+            <!-- Aesthetic reference will be populated by JS -->
+          </div>
+          <p class="report__disclaimer">⚠️ 以上仅供科普参考，请咨询正规医疗机构执业医师</p>
+        </div>
+        
+        <!-- Advice Tabs -->
+        <div class="report__advice-section">
+          <div id="advice-tab-bar" class="tab-bar">
+            <button class="tab-bar__item tab-bar__item--active" data-tab="skincare">
+              <span class="tab-bar__icon">🌿</span>
+              <span>护肤</span>
+            </button>
+            <button class="tab-bar__item" data-tab="makeup">
+              <span class="tab-bar__icon">💄</span>
+              <span>彩妆</span>
+            </button>
+            <button class="tab-bar__item" data-tab="aesthetic">
+              <span class="tab-bar__icon">✧</span>
+              <span>医美参考</span>
+            </button>
+            <div class="tab-bar__indicator" style="left: 0; width: 33.33%"></div>
+          </div>
+          
+          <div id="skincare-content" class="report__tab-content" data-tab="skincare">
+            <!-- Skincare advice will be populated by JS -->
+          </div>
+          
+          <div id="makeup-content" class="report__tab-content" data-tab="makeup" style="display: none;">
+            <!-- Makeup advice will be populated by JS -->
+          </div>
+          
+          <div id="aesthetic-content" class="report__tab-content" data-tab="aesthetic" style="display: none;">
+            <!-- Aesthetic advice will be populated by JS -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Disclaimer -->
+      <div class="disclaimer">
+        <span>⚕️</span>
+        <span>AI 分析结果为参考性质，不具备医学效力</span>
+      </div>
+    </section>
+    
+    <!-- ========== Screen 4: 分享页 ========== -->
+    <section id="screen-share" class="screen screen-share">
+      <!-- Navbar -->
+      <nav class="navbar">
+        <button class="navbar__action" data-action="back" aria-label="返回">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <span class="navbar__brand" style="font-size: 16px;">生成分享卡片</span>
+        <div class="navbar__action" style="visibility: hidden;"></div>
+      </nav>
+      
+      <div class="share__content">
+        <h2 class="share__title">选择卡片样式</h2>
+        
+        <!-- Template Selector -->
+        <div class="template-selector">
+          <div class="template-option template-option--active" data-template="black-gold">
+            <div style="width: 100%; height: 100%; background: #0E0C0F; display: flex; align-items: center; justify-content: center;">
+              <span style="color: #C9A96E; font-size: 11px;">黑金卡</span>
+            </div>
+          </div>
+          <div class="template-option" data-template="sakura">
+            <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #FDF0F4, #FFF8F0); display: flex; align-items: center; justify-content: center;">
+              <span style="color: #D4849A; font-size: 11px;">樱花卡</span>
+            </div>
+          </div>
+          <div class="template-option" data-template="magazine">
+            <div style="width: 100%; height: 100%; background: #FAF7F4; display: flex; align-items: center; justify-content: center;">
+              <span style="color: #1A1A1A; font-size: 11px;">杂志卡</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Preview -->
+        <div class="share__preview">
+          <div id="share-preview" class="share__preview-card">
+            <!-- Preview will be rendered by JS -->
+          </div>
+        </div>
+        
+        <!-- Actions -->
+        <div class="share__actions">
+          <button id="download-card" class="btn-primary">
+            <span>保存到相册</span>
+          </button>
+          <button id="share-card" class="btn-secondary" style="width: 100%;">
+            分享给好友
+          </button>
+        </div>
+        
+        <!-- PK Mode -->
+        <div class="share__pk">
+          <div class="pk-invite">
+            <div class="pk-invite__icon">⚔️</div>
+            <div class="pk-invite__text">
+              <div class="pk-invite__title">邀请好友 PK 颜值</div>
+              <div class="pk-invite__desc">生成专属链接，看看谁是颜值担当</div>
+            </div>
+            <button id="create-pk-link" class="btn-secondary">生成邀请</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ========== Screen 5: PK 结果页 ========== -->
+    <section id="screen-pk" class="screen screen-pk">
+      <nav class="navbar">
+        <button class="navbar__action" data-action="back" aria-label="返回">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <span class="navbar__brand" style="font-size: 16px;">颜值 PK</span>
+        <div class="navbar__action" style="visibility: hidden;"></div>
+      </nav>
+      
+      <div class="pk__content">
+        <div class="pk__vs-section">
+          <div class="pk__player pk__player--a">
+            <img id="pk-avatar-a" class="pk__avatar" src="" alt="玩家A">
+            <div id="pk-score-a" class="pk__score">0.0</div>
+            <div id="pk-rank-a" class="pk__rank">分析中</div>
+          </div>
+          <div class="pk__vs">VS</div>
+          <div class="pk__player pk__player--b">
+            <img id="pk-avatar-b" class="pk__avatar" src="" alt="玩家B">
+            <div id="pk-score-b" class="pk__score">0.0</div>
+            <div id="pk-rank-b" class="pk__rank">分析中</div>
+          </div>
+        </div>
+        
+        <div class="pk__dimensions">
+          <h3 class="pk__dimensions-title">─── 维度对决 ───</h3>
+          <div id="pk-dimensions-list">
+            <!-- PK dimension bars will be populated by JS -->
+          </div>
+        </div>
+        
+        <div class="pk__result glass-card">
+          <div class="pk__result-icon">✨</div>
+          <div id="pk-compatibility" class="pk__compatibility">颜值互补指数：<span>0%</span></div>
+          <div id="pk-summary" class="pk__summary"></div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ========== Screen 6: 个人中心 ========== -->
+    <section id="screen-profile" class="screen screen-profile">
+      <nav class="navbar">
+        <button class="navbar__action" data-action="back" aria-label="返回">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <span class="navbar__brand" style="font-size: 16px;">个人中心</span>
+        <button class="navbar__action" data-action="settings" aria-label="设置">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </nav>
+      
+      <div class="profile__content">
+        <!-- Score Trend Chart -->
+        <div class="profile__chart-section glass-card">
+          <h3 class="profile__section-title">颜值变化趋势</h3>
+          <div class="profile__chart">
+            <canvas id="score-trend-canvas" width="320" height="160"></canvas>
+          </div>
+          <div class="profile__chart-legend">
+            <span class="profile__chart-legend-item">
+              <span class="profile__legend-dot profile__legend-dot--gold"></span>
+              颜值评分
+            </span>
+          </div>
+        </div>
+        
+        <!-- History Timeline -->
+        <div class="profile__history-section">
+          <h3 class="profile__section-title">历史记录</h3>
+          <div id="history-timeline" class="profile__timeline">
+            <!-- Timeline items will be populated by JS -->
+            <div class="profile__empty">
+              <div class="profile__empty-icon">📋</div>
+              <div class="profile__empty-text">暂无分析记录</div>
+              <button class="btn-secondary" data-action="go-analyze">开始第一次分析</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 30-Day Check-in -->
+        <div class="profile__checkin-section glass-card">
+          <div class="profile__checkin-header">
+            <h3 class="profile__section-title">30天变美打卡</h3>
+            <span id="checkin-streak" class="profile__streak">连续 <span>0</span> 天</span>
+          </div>
+          <div id="checkin-grid" class="profile__checkin-grid">
+            <!-- Check-in grid will be populated by JS -->
+          </div>
+          <div id="today-task" class="profile__today-task">
+            <span class="profile__task-icon">💧</span>
+            <span class="profile__task-text">今日任务：晚间使用烟酰胺精华</span>
+            <button id="checkin-btn" class="btn-secondary">打卡</button>
+          </div>
+          <div class="profile__checkin-rewards">
+            <div class="profile__reward">
+              <span class="profile__reward-icon">🎁</span>
+              <span>连续7天：解锁进阶彩妆教程</span>
+            </div>
+            <div class="profile__reward">
+              <span class="profile__reward-icon">🏆</span>
+              <span>连续30天：解锁复测优先通道</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ========== Toast ========== -->
+    <div id="toast" class="toast">
+      <span class="toast__icon"></span>
+      <span class="toast__message"></span>
+    </div>
+    
+    <!-- ========== API Key Modal ========== -->
+    <div id="api-key-modal" class="modal-overlay">
+      <div class="modal">
+        <h3 class="modal__title">设置 API Key</h3>
+        <div class="modal__content">
+          <p style="margin-bottom: 16px;">请输入您的 Anthropic Claude API Key 以启用 AI 分析功能。</p>
+          <div class="api-key-input">
+            <svg class="api-key-input__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+            </svg>
+            <input type="password" id="api-key-input" class="api-key-input__field" placeholder="sk-ant-api03-...">
+          </div>
+          <p style="font-size: 11px; color: var(--color-text-muted);">
+            API Key 仅存储在本地，不会上传至服务器。
+            <a href="https://console.anthropic.com/" target="_blank" rel="noopener" style="color: var(--color-primary);">获取 API Key →</a>
+          </p>
+        </div>
+        <div class="modal__actions">
+          <button id="api-key-save" class="btn-primary">保存</button>
+          <button id="api-key-cancel" class="btn-text">取消</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ========== Ingredient Tooltip Modal ========== -->
+    <div id="ingredient-tooltip" class="ingredient-tooltip">
+      <div class="ingredient-tooltip__header">
+        <span id="ingredient-name" class="ingredient-tooltip__name">成分名称</span>
+        <span id="ingredient-name-en" class="ingredient-tooltip__name-en">English Name</span>
+      </div>
+      <div id="ingredient-effect" class="ingredient-tooltip__effect"></div>
+      <div class="ingredient-tooltip__details">
+        <div class="ingredient-tooltip__item">
+          <span class="ingredient-tooltip__label">建议浓度</span>
+          <span id="ingredient-concentration" class="ingredient-tooltip__value"></span>
+        </div>
+        <div class="ingredient-tooltip__item">
+          <span class="ingredient-tooltip__label">注意事项</span>
+          <span id="ingredient-caution" class="ingredient-tooltip__value"></span>
+        </div>
+      </div>
+      <button class="ingredient-tooltip__close" aria-label="关闭">×</button>
+    </div>
+    
+    <!-- ========== PK Link Modal ========== -->
+    <div id="pk-link-modal" class="modal-overlay">
+      <div class="modal">
+        <h3 class="modal__title">⚔️ 邀请好友 PK</h3>
+        <div class="modal__content">
+          <p style="margin-bottom: 16px;">复制下方链接发送给好友，TA 完成分析后即可查看 PK 结果！</p>
+          <div class="pk-link-box">
+            <input type="text" id="pk-link-input" class="pk-link-input" readonly>
+            <button id="copy-pk-link" class="btn-secondary">复制</button>
+          </div>
+        </div>
+        <div class="modal__actions">
+          <button id="pk-link-close" class="btn-text">关闭</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ========== Advice Detail Modal ========== -->
+    <div id="advice-detail-modal" class="modal-overlay">
+      <div class="modal modal--large">
+        <div class="modal__header">
+          <span id="advice-detail-icon" class="modal__icon"></span>
+          <div class="modal__header-text">
+            <h3 id="advice-detail-title" class="modal__title"></h3>
+            <div id="advice-detail-improvement" class="modal__improvement"></div>
+          </div>
+          <button class="modal__close" data-action="close-advice-detail" aria-label="关闭">×</button>
+        </div>
+        <div class="modal__content modal__content--scroll">
+          <div id="advice-detail-summary" class="advice-detail__summary"></div>
+          
+          <!-- Schedule Section (for skincare) -->
+          <div id="advice-detail-schedule" class="advice-detail__section" style="display: none;">
+            <h4 class="advice-detail__section-title">⏰ 每日护肤时刻表</h4>
+            <div id="advice-detail-schedule-content" class="advice-detail__schedule"></div>
+          </div>
+          
+          <div class="advice-detail__section">
+            <h4 class="advice-detail__section-title">📖 详细方案</h4>
+            <div id="advice-detail-info" class="advice-detail__info"></div>
+          </div>
+          
+          <!-- Key Ingredients -->
+          <div id="advice-detail-ingredients" class="advice-detail__section" style="display: none;">
+            <h4 class="advice-detail__section-title">🧪 关键成分</h4>
+            <div id="advice-detail-ingredients-list" class="advice-detail__ingredients"></div>
+          </div>
+          
+          <div id="advice-detail-procedures" class="advice-detail__section" style="display: none;">
+            <h4 class="advice-detail__section-title">💉 推荐项目</h4>
+            <div id="advice-detail-procedure-list" class="advice-detail__procedures"></div>
+          </div>
+          <div id="advice-detail-caution" class="advice-detail__caution"></div>
+        </div>
+        <div class="modal__actions">
+          <button id="add-to-calendar-btn" class="btn-secondary" style="display: none;">
+            📅 添加到日历
+          </button>
+          <button class="btn-primary" data-action="close-advice-detail">已了解</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ========== Landscape Warning ========== -->
+    <div class="landscape-warning">
+      <div class="landscape-warning__icon">📱</div>
+      <p class="landscape-warning__text">请将设备旋转为竖屏模式</p>
+    </div>
+  </div>
+  
+  <!-- Main Script -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

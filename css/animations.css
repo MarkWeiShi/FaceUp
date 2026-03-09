@@ -1,0 +1,351 @@
+/**
+ * 顔鉴 · AI 颜值评分 H5
+ * 动画定义 - 所有 @keyframes 动画
+ * Version: 1.0
+ */
+
+/* ========== 进场动画 ========== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ========== 退场动画 ========== */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+/* ========== 呼吸动画 ========== */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes pulseScale {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* ========== 扫描线动画 ========== */
+@keyframes scanLine {
+  0% { top: 0; }
+  50% { top: calc(100% - 2px); }
+  100% { top: 0; }
+}
+
+@keyframes scanLineHorizontal {
+  0% { left: 0; }
+  100% { left: calc(100% - 100px); }
+}
+
+/* ========== 旋转动画 ========== */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ========== 进度条动画 ========== */
+@keyframes progressGrow {
+  from { width: 0; }
+}
+
+@keyframes progressPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ========== 弹出动画 ========== */
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes checkMark {
+  0% {
+    stroke-dashoffset: 24;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ========== 波纹动画 ========== */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ========== 渐变流动 ========== */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ========== 边框流光 ========== */
+@keyframes borderGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(201, 169, 110, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(201, 169, 110, 0.5);
+  }
+}
+
+/* ========== 数字滚动 ========== */
+@keyframes numberFlip {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+/* ========== 圆弧绘制 ========== */
+@keyframes drawArc {
+  from { stroke-dashoffset: var(--arc-length); }
+  to { stroke-dashoffset: var(--arc-final); }
+}
+
+/* ========== 闪烁动画 ========== */
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+/* ========== 漂浮动画 ========== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ========== 樱花飘落 ========== */
+@keyframes sakuraFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ========== 动画工具类 ========== */
+.animate-fade-in {
+  animation: fadeIn var(--transition-slow) var(--ease-out-cubic) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--transition-slow) var(--ease-out-cubic) forwards;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown var(--transition-slow) var(--ease-out-cubic) forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale var(--transition-slow) var(--ease-out-cubic) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft var(--transition-slow) var(--ease-out-cubic) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight var(--transition-slow) var(--ease-out-cubic) forwards;
+}
+
+.animate-breathe {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 2s linear infinite;
+}
+
+.animate-pop-in {
+  animation: popIn 300ms var(--ease-out-back) forwards;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 400ms var(--ease-out-cubic) forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ========== Staggered 动画延迟 ========== */
+.stagger-delay-1 { animation-delay: 80ms; }
+.stagger-delay-2 { animation-delay: 160ms; }
+.stagger-delay-3 { animation-delay: 240ms; }
+.stagger-delay-4 { animation-delay: 320ms; }
+.stagger-delay-5 { animation-delay: 400ms; }
+.stagger-delay-6 { animation-delay: 480ms; }
+.stagger-delay-7 { animation-delay: 560ms; }
+.stagger-delay-8 { animation-delay: 640ms; }
+
+/* ========== 减少动画（无障碍） ========== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

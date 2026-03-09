@@ -1,0 +1,13 @@
+# Environment config with API keys
+js/env.js
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log

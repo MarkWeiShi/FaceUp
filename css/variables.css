@@ -1,0 +1,150 @@
+/**
+ * 顔鉴 · AI 颜值评分 H5
+ * CSS 变量定义 - 色彩/字体/间距/动效
+ * Version: 1.0
+ */
+
+:root {
+  /* ========== 主色调 Primary ========== */
+  --color-bg: #0E0C0F;           /* 页面背景（深黑近墨） */
+  --color-primary: #C9A96E;      /* 金色主题色（高光、分数、主按钮） */
+  --color-primary-dark: #8A6A35; /* 金色深调（次级标题、边框） */
+  --color-primary-gradient: linear-gradient(135deg, #C9A96E 0%, #8A6A35 100%);
+  
+  /* ========== 辅助色 Secondary ========== */
+  --color-rose: #D4849A;         /* 玫瑰调（彩妆模块、女性感标签） */
+  --color-jade: #7EB8A4;         /* 玉绿调（正向反馈、优势维度） */
+  --color-sky: #A8C5D8;          /* 天青调（清爽提示、次级标签） */
+  --color-gold-light: #F0C060;   /* 浅金色（神颜段位） */
+  
+  /* ========== 文字色 Typography ========== */
+  --color-text-primary: #F0EBE4;   /* 正文主色（温暖白） */
+  --color-text-secondary: #C8BFB8; /* 二级文字（描述、评语） */
+  --color-text-tertiary: #9A9090;  /* 三级文字（标签、说明） */
+  --color-text-muted: #6B6570;     /* 禁用/占位文字 */
+  
+  /* ========== 功能色 Functional ========== */
+  --color-success: #4CAF6E;      /* 成功/正向 */
+  --color-warning: #F0A040;      /* 警告/提示 */
+  --color-error: #E05C5C;        /* 错误/警告 */
+  
+  /* ========== 段位颜色 Rank Colors ========== */
+  --rank-divine: #F0C060;        /* 神颜 8.5-9.0 */
+  --rank-high: #C9A96E;          /* 高颜值 7.5-8.4 */
+  --rank-pretty: #7EB8A4;        /* 靓丽 6.5-7.4 */
+  --rank-elegant: #A8C5D8;       /* 清秀 5.5-6.4 */
+  --rank-natural: #D4849A;       /* 邻家 4.5-5.4 */
+  --rank-potential: #B0A8B0;     /* 潜力股 <4.5 */
+  
+  /* ========== 透明度 Opacity ========== */
+  --opacity-card-bg: 0.04;
+  --opacity-border: 0.06;
+  --opacity-hover: 0.08;
+  --opacity-grain: 0.04;
+  --opacity-glow: 0.06;
+  
+  /* ========== 字体 Typography ========== */
+  --font-serif: 'Noto Serif SC', 'Source Han Serif SC', '思源宋体', serif;
+  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-mono: 'SF Mono', 'Consolas', 'Monaco', monospace;
+  
+  /* ========== 字阶 Font Scale ========== */
+  --font-size-display: 72px;     /* 分数大字 */
+  --font-size-h1: 48px;          /* 品牌名 */
+  --font-size-h2: 24px;          /* 页面标题 */
+  --font-size-h3: 18px;          /* 段落标题 */
+  --font-size-body-l: 16px;      /* 主要正文 */
+  --font-size-body-m: 14px;      /* 卡片正文 */
+  --font-size-body-s: 13px;      /* 次级说明 */
+  --font-size-caption: 11px;     /* 标签/注释 */
+  
+  /* ========== 行高 Line Height ========== */
+  --line-height-tight: 1.0;
+  --line-height-snug: 1.1;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.6;
+  --line-height-loose: 1.7;
+  
+  /* ========== 字重 Font Weight ========== */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* ========== 间距 Spacing ========== */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 32px;
+  --spacing-4xl: 48px;
+  
+  /* ========== 页面边距 Page Margin ========== */
+  --page-margin: 20px;
+  --card-padding-sm: 16px;
+  --card-padding-lg: 20px;
+  
+  /* ========== 圆角 Border Radius ========== */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-pill: 27px;
+  --radius-full: 50%;
+  
+  /* ========== 阴影 Shadows ========== */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 20px rgba(201, 169, 110, 0.1);
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.5);
+  
+  /* ========== 动效 Transitions ========== */
+  --transition-fast: 150ms;
+  --transition-normal: 200ms;
+  --transition-slow: 300ms;
+  --transition-page: 400ms;
+  --transition-score: 1800ms;
+  
+  /* ========== 缓动函数 Easing ========== */
+  --ease-out-cubic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  
+  /* ========== 层级 Z-Index ========== */
+  --z-base: 0;
+  --z-above: 1;
+  --z-sticky: 10;
+  --z-modal: 100;
+  --z-toast: 200;
+  --z-overlay: 300;
+  
+  /* ========== 安全区域 Safe Area ========== */
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  
+  /* ========== 导航栏高度 ========== */
+  --nav-height: 56px;
+  --tab-height: 44px;
+  --status-bar-height: 44px;
+}
+
+/* ========== 暗色模式（默认） ========== */
+[data-theme="dark"] {
+  --color-bg: #0E0C0F;
+  --color-text-primary: #F0EBE4;
+}
+
+/* ========== 亮色模式 ========== */
+[data-theme="light"] {
+  --color-bg: #FAF7F4;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #4A4A4A;
+  --color-text-tertiary: #6A6A6A;
+  --color-text-muted: #9A9A9A;
+}
